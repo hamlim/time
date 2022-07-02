@@ -22,15 +22,17 @@
     "next": "canary",
     "next-transpile-modules": "^9.0.0",
     "polished": "^4.2.2",
-    "rainbow-sprinkles": "^0.6",
+    "rainbow-sprinkles": "^0.12",
     "react": "experimental",
     "react-dom": "experimental",
     "webpack": "^5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7",
+    "@cloudflare/workers-types": "^3.14.0",
     "@types/node": "^14",
     "@types/react": "^18",
-    "typescript": "^4"
+    "typescript": "^4",
+    "wrangler": "^2.0.15"
   }
 }

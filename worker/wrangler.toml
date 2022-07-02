@@ -1,0 +1,13 @@
+name = "time-worker"
+main = "src/index.ts"
+compatibility_date = "2022-07-01"
+
+# [env.development]
+# kv_namespaces = [
+#   { binding = "TIME_KV", id = "b4c55bdc597944a88ca443a7d8cab039" }
+# ]
+
+# [env.production]
+kv_namespaces = [
+  { binding = "TIME_KV", id = "b750e071ce904993868b7ad4b7967e6d", preview_id = "4dc600c754ff43c392a423df1a5c6466" },
+]
