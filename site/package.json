@@ -1,0 +1,31 @@
+{
+  "name": "site",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "deploy": "now",
+    "deploy-prod": "now --prod"
+  },
+  "dependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/runtime": "^7",
+    "@ds-pack/components": "*",
+    "@ds-pack/use-refs": "^1",
+    "@vanilla-extract/babel-plugin": "*",
+    "@vanilla-extract/css": "*",
+    "@vanilla-extract/dynamic": "*",
+    "@vanilla-extract/next-plugin": "*",
+    "nanopop": "^2",
+    "next": "canary",
+    "next-transpile-modules": "^9.0.0",
+    "polished": "^4.2.2",
+    "rainbow-sprinkles": "^0.12",
+    "react": "experimental",
+    "react-dom": "experimental",
+    "webpack": "^5"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-export-default-from": "^7"
+  }
+}

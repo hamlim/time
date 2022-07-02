@@ -25,7 +25,14 @@ export default {
     env: Env,
     ctx: ExecutionContext,
   ): Promise<Response> {
-    if (request.method === 'GET') {
+    if (request.method === 'OPTIONS') {
+      return new Response('OK', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST',
+        },
+      })
+    } else if (request.method === 'GET') {
       return await handleGet(request, env)
     } else if (request.method === 'POST') {
       return await handlePost(request, env)

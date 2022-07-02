@@ -1,0 +1,7 @@
+{
+  "name": "worker",
+  "scripts": {
+    "dev": "yarn wrangler dev",
+    "deploy": "yarn wrangler publish"
+  }
+}
