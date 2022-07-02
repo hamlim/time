@@ -3,5 +3,8 @@
   "scripts": {
     "dev": "yarn wrangler dev",
     "deploy": "yarn wrangler publish"
+  },
+  "devDependencies": {
+    "wrangler": "^2.0.15"
   }
 }
