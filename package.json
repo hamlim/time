@@ -17,6 +17,7 @@
     "@cloudflare/workers-types": "^3.14.0",
     "@types/node": "^14",
     "@types/react": "^18",
+    "next": "canary",
     "typescript": "^4"
   },
   "packageManager": "yarn@3.2.1"
