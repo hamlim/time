@@ -22,7 +22,7 @@ export default function Name({ name }) {
     `${process.env.NEXT_PUBLIC_WORKER_BASE_URL}/?name=${name}`,
   )
 
-  if (result.success === 'false') {
+  if (result.success === false) {
     throw new Error(result.message)
   }
   return (
