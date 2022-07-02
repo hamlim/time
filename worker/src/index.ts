@@ -10,7 +10,7 @@
 
 export interface Env {
   // Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
-  TIME_KV: KVNamespace
+  TIME_KV: KVNamespace;
   //
   // Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
   // MY_DURABLE_OBJECT: DurableObjectNamespace;
@@ -19,26 +19,28 @@ export interface Env {
   // MY_BUCKET: R2Bucket;
 }
 
+let corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST",
+};
+
 export default {
   async fetch(
     request: Request,
     env: Env,
-    ctx: ExecutionContext,
+    ctx: ExecutionContext
   ): Promise<Response> {
-    if (request.method === 'OPTIONS') {
-      return new Response('OK', {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST',
-        },
-      })
-    } else if (request.method === 'GET') {
-      return await handleGet(request, env)
-    } else if (request.method === 'POST') {
-      return await handlePost(request, env)
+    if (request.method === "OPTIONS") {
+      return new Response("OK", {
+        headers: corsHeaders,
+      });
+    } else if (request.method === "GET") {
+      return await handleGet(request, env);
+    } else if (request.method === "POST") {
+      return await handlePost(request, env);
     }
   },
-}
+};
 
 function createErrorResponse(message: string) {
   return new Response(
@@ -49,26 +51,27 @@ function createErrorResponse(message: string) {
           message,
         }),
       ],
-      { type: 'application/json' },
+      { type: "application/json" }
     ),
     {
       status: 500,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        ...corsHeaders,
       },
-    },
-  )
+    }
+  );
 }
 
 async function handleGet(request: Request, env: Env) {
-  let { searchParams } = new URL(request.url)
-  let name = searchParams.get('name')
+  let { searchParams } = new URL(request.url);
+  let name = searchParams.get("name");
   if (!name) {
-    return createErrorResponse('No name query param on request!')
+    return createErrorResponse("No name query param on request!");
   }
-  let value = await env.TIME_KV.get(name, { type: 'json' })
+  let value = await env.TIME_KV.get(name, { type: "json" });
   if (!value) {
-    return createErrorResponse(`No record found for '${name}'!`)
+    return createErrorResponse(`No record found for '${name}'!`);
   }
   return new Response(
     new Blob(
@@ -78,35 +81,36 @@ async function handleGet(request: Request, env: Env) {
           success: true,
         }),
       ],
-      { type: 'application/json' },
+      { type: "application/json" }
     ),
     {
       status: 200,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        ...corsHeaders,
       },
-    },
-  )
+    }
+  );
 }
 
 interface PostBody {
-  name?: string
-  value?: string
+  name?: string;
+  value?: string;
 }
 
 async function handlePost(request: Request, env: Env) {
-  let body = (await request.json()) as unknown as PostBody
+  let body = (await request.json()) as unknown as PostBody;
 
   if (!body.name) {
-    return createErrorResponse(`No 'name' field provided to POST request!`)
+    return createErrorResponse(`No 'name' field provided to POST request!`);
   }
   if (!body.value) {
     return createErrorResponse(
-      `No 'value' field provided to POST request for name: '${body.name}'!`,
-    )
+      `No 'value' field provided to POST request for name: '${body.name}'!`
+    );
   }
 
-  await env.TIME_KV.put(body.name, JSON.parse(body.value))
+  await env.TIME_KV.put(body.name, JSON.parse(body.value));
 
   return new Response(
     new Blob(
@@ -116,13 +120,14 @@ async function handlePost(request: Request, env: Env) {
           success: true,
         }),
       ],
-      { type: 'application/json' },
+      { type: "application/json" }
     ),
     {
       status: 200,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        ...corsHeaders,
       },
-    },
-  )
+    }
+  );
 }
