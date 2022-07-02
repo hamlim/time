@@ -1,25 +1,13 @@
-# Template Next.js App
+# Time 🕰
 
-This repo acts as a template repo for some of my Next.js applications.
+Monorepo with a Next.js site and a Cloudflare Worker backend for saving and visualizing dates!
 
 ## Getting Started:
 
 ```sh
-pnpm install
+yarn install
 ```
 
 ```sh
-pnpm dev
-```
-
-## Deploying:
-
-```sh
-pnpm deploy
-```
-
-When you're ready to deploy to production:
-
-```sh
-pnpm deploy-prod
+yarn dev
 ```
