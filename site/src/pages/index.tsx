@@ -1,9 +1,9 @@
 import { Box, Text } from '@ds-pack/components'
 
-export default function App() {
+export default function Landing() {
   return (
     <Box>
-      <Text>Hello, World!</Text>
+      <Text>More coming soon!</Text>
     </Box>
   )
 }
