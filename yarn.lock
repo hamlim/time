@@ -415,6 +415,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@matthamlin/simple-cache@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@matthamlin/simple-cache@npm:2.0.2"
+  peerDependencies:
+    "@babel/runtime": ^7
+    react: "*"
+  checksum: 0ef1e709b74a919e17c768b139b358bb79ae375147a75707f044397f2141b183686c133649e0d220171956c1761196586768a8ed2bd951dd37f8cb9b24fc3886
+  languageName: node
+  linkType: hard
+
 "@miniflare/cache@npm:2.5.1":
   version: 2.5.1
   resolution: "@miniflare/cache@npm:2.5.1"
@@ -3193,6 +3203,7 @@ __metadata:
     "@cloudflare/workers-types": ^3.14.0
     "@ds-pack/components": "*"
     "@ds-pack/use-refs": ^1
+    "@matthamlin/simple-cache": 2.0.2
     "@types/node": ^14
     "@types/react": ^18
     "@vanilla-extract/babel-plugin": "*"

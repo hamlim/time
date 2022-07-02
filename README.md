@@ -8,6 +8,8 @@ Monorepo with a Next.js site and a Cloudflare Worker backend for saving and visu
 yarn install
 ```
 
+Local dev: (spins up worker and site)
+
 ```sh
 yarn dev
 ```
