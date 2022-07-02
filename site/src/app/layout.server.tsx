@@ -9,10 +9,7 @@ export default function Layout({ children }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <title>Time from APP</title>
       </head>
-      <body>
-        <marquee>App!</marquee>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
