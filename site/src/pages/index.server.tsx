@@ -5,7 +5,7 @@ export default function Landing() {
   return (
     <Box>
       <Text>More coming soon!</Text>
-      <Link href="/dates/foo">Go to Foo</Link>
+      <Link href="/dates/test-1">Go to test-1</Link>
     </Box>
   )
 }
