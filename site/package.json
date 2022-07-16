@@ -6,5 +6,30 @@
     "start": "next start",
     "deploy": "now",
     "deploy-prod": "now --prod"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/plugin-proposal-export-default-from": "^7",
+    "@types/node": "^14",
+    "@types/react": "^18",
+    "@vanilla-extract/babel-plugin": "*",
+    "@vanilla-extract/css": "*",
+    "@vanilla-extract/next-plugin": "*",
+    "polished": "^4.2.2",
+    "typescript": "^4",
+    "webpack": "^5"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7",
+    "@ds-pack/components": "*",
+    "@ds-pack/use-refs": "^1",
+    "@matthamlin/simple-cache": "2.0.2",
+    "@vanilla-extract/dynamic": "*",
+    "nanopop": "^2",
+    "next": "canary",
+    "next-transpile-modules": "^9.0.0",
+    "rainbow-sprinkles": "^0.12",
+    "react": "experimental",
+    "react-dom": "experimental"
   }
 }
