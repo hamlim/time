@@ -9,3 +9,9 @@ export default function Landing() {
     </Box>
   )
 }
+
+export async function getServerSideProps() {
+  return {
+    props: {},
+  }
+}
