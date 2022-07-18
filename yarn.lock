@@ -2525,7 +2525,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:canary":
+"next@npm:12.2.3-canary.12":
   version: 12.2.3-canary.12
   resolution: "next@npm:12.2.3-canary.12"
   dependencies:
@@ -3002,7 +3002,7 @@ __metadata:
     "@vanilla-extract/dynamic": "*"
     "@vanilla-extract/next-plugin": "*"
     nanopop: ^2
-    next: canary
+    next: 12.2.3-canary.12
     next-transpile-modules: ^9.0.0
     polished: ^4.2.2
     rainbow-sprinkles: ^0.12
