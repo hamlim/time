@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@ds-pack/components": "*",
+    "@ds-pack/components": "^1.0.9",
     "@ds-pack/use-refs": "^1",
     "@matthamlin/simple-cache": "2.0.2",
     "@vanilla-extract/dynamic": "*",

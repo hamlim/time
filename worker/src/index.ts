@@ -21,7 +21,7 @@ export interface Env {
 
 let corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST",
+  "Access-Control-Allow-Methods": "GET, OPTIONS, POST",
 };
 
 export default {
@@ -65,13 +65,18 @@ function createErrorResponse(message: string) {
 
 async function handleGet(request: Request, env: Env) {
   let { searchParams } = new URL(request.url);
-  let name = searchParams.get("name");
-  if (!name) {
+  let username = searchParams.get("username");
+  if (!username) {
     return createErrorResponse("No name query param on request!");
   }
-  let value = await env.TIME_KV.get(name, { type: "json" });
+  let value;
+  try {
+    value = await env.TIME_KV.get(username, { type: "json" });
+  } catch (e) {
+    return createErrorResponse(`Unable to parse value for '${username}'!`);
+  }
   if (!value) {
-    return createErrorResponse(`No record found for '${name}'!`);
+    return createErrorResponse(`No record found for '${username}'!`);
   }
   return new Response(
     new Blob(
@@ -94,40 +99,133 @@ async function handleGet(request: Request, env: Env) {
 }
 
 interface PostBody {
-  name?: string;
+  username?: string;
   value?: string;
+  passkey?: string;
+}
+
+interface Value {
+  dates: Array<{
+    name: string;
+    date: string;
+  }>;
+  passkey: string;
 }
 
 async function handlePost(request: Request, env: Env) {
   let body = (await request.json()) as unknown as PostBody;
 
-  if (!body.name) {
-    return createErrorResponse(`No 'name' field provided to POST request!`);
-  }
-  if (!body.value) {
-    return createErrorResponse(
-      `No 'value' field provided to POST request for name: '${body.name}'!`
-    );
+  let pathname = new URL(request.url).pathname;
+  if (!body.username) {
+    return createErrorResponse(`No 'username' field provided to POST request!`);
   }
 
-  await env.TIME_KV.put(body.name, JSON.parse(body.value));
+  switch (pathname) {
+    // creating a user
+    case "/create": {
+      let userExists = false;
+      try {
+        let res = await env.TIME_KV.get(body.username);
+        userExists = !!res;
+      } catch (e) {
+        userExists = false;
+      }
+      if (userExists) {
+        return createErrorResponse(
+          `User with username: '${body.username}' already exists! If you created this account, try logging in instead, otherwise try another username.`
+        );
+      }
+      await env.TIME_KV.put(
+        body.username,
+        JSON.stringify({ dates: [], passkey: body.passkey })
+      );
 
-  return new Response(
-    new Blob(
-      [
-        JSON.stringify({
-          data: JSON.parse(body.value),
-          success: true,
-        }),
-      ],
-      { type: "application/json" }
-    ),
-    {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        ...corsHeaders,
-      },
+      return new Response(
+        new Blob(
+          [
+            JSON.stringify({
+              data: {
+                dates: [],
+                passkey: body.passkey,
+              },
+              success: true,
+            }),
+          ],
+          { type: "application/json" }
+        ),
+        {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
+        }
+      );
     }
-  );
+    // checking username and passkey combo
+    case "/check-user": {
+      let valid = false;
+      try {
+        let res = (await env.TIME_KV.get(body.username, {
+          type: "json",
+        })) as Value;
+        valid = res.passkey === body.passkey;
+      } catch (e) {
+        valid = false;
+      }
+      if (!valid) {
+        return createErrorResponse(
+          `Incorrect 'passkey' for user: '${body.username}'!`
+        );
+      }
+
+      return new Response(
+        new Blob(
+          [
+            JSON.stringify({
+              success: true,
+            }),
+          ],
+          { type: "application/json" }
+        ),
+        {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
+        }
+      );
+    }
+    // Adding a date to the user...
+    case "/":
+    default: {
+      if (!body.value) {
+        return createErrorResponse(
+          `No 'value' field provided to POST request for name: '${body.username}'!`
+        );
+      }
+
+      await env.TIME_KV.put(body.username, JSON.stringify(body.value));
+
+      return new Response(
+        new Blob(
+          [
+            JSON.stringify({
+              data: body.value,
+              success: true,
+            }),
+          ],
+          { type: "application/json" }
+        ),
+        {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
+        }
+      );
+    }
+  }
 }

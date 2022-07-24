@@ -287,18 +287,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ds-pack/components@npm:*":
-  version: 1.0.6
-  resolution: "@ds-pack/components@npm:1.0.6"
+"@ds-pack/components@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "@ds-pack/components@npm:1.0.9"
   peerDependencies:
     "@ds-pack/use-refs": "*"
     "@vanilla-extract/css": ^1.6.8
     "@vanilla-extract/dynamic": ^2.0.2
     nanopop: ^2
-    rainbow-sprinkles: ^0.11
+    rainbow-sprinkles: ^0.12
     react: "*"
     react-dom: "*"
-  checksum: a8dfb2264b5553d1954aa390227e43767f22cb6ae98fb78ba9e669a6f0d7db161d4a7709c185edb5a6b9ed2307ba28ad3a69ce59c25116f81d4fcb539b65d390
+  checksum: 92914480371f7679d74dc85a8e9cffebabeb96bfa00ca55ec66d537495ca082bc15b32b0a04261e8d037b729b1e79ede2043cc8ebe95a28ed2b0f58eae89b1ad
   languageName: node
   linkType: hard
 
@@ -4287,7 +4287,7 @@ __metadata:
     "@babel/core": ^7.18.0
     "@babel/plugin-proposal-export-default-from": ^7
     "@babel/runtime": ^7
-    "@ds-pack/components": "*"
+    "@ds-pack/components": ^1.0.9
     "@ds-pack/use-refs": ^1
     "@matthamlin/simple-cache": 2.0.2
     "@types/node": ^14
