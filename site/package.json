@@ -26,7 +26,7 @@
     "@matthamlin/simple-cache": "2.0.2",
     "@vanilla-extract/dynamic": "*",
     "nanopop": "^2",
-    "next": "^12.2.3",
+    "next": "^14.2.30",
     "next-transpile-modules": "^9.0.0",
     "rainbow-sprinkles": "^0.12",
     "react": "experimental",
